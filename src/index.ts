@@ -18,3 +18,7 @@ app.get("/socrates", (req: Request, res: Response) => {
 
   return res.status(200).json(quizData);
 });
+
+app.get("/", (req: Request, res: Response) => {
+  return res.status(200).json("희지님 반가워요");
+});
