@@ -14,7 +14,17 @@ app.listen(8080, () => {
 });
 
 app.get("/socrates", (req: Request, res: Response) => {
-  console.log(quizData);
-
-  return res.status(200).json(quizData);
+  const randomQuizData = getRandomQuizData(quizData, 10);
+  return res.status(200).json(randomQuizData);
 });
+
+// 데이터 10개 랜덤함수
+function getRandomQuizData(data: typeof quizData, count: number) {
+  const shuffled = data.slice(); // 얉은 복사
+
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled.slice(0, count);
+}
